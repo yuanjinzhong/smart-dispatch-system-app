@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { useOrderStore } from '@/store/useOrderStore';
 import { Toast } from 'antd-mobile';
 import { Order } from '@/types/order';
-import { USE_MOCK, simulateOrderPush } from '@/mocks/mockServices';
+import { USE_MOCK, generateMockOrder } from '@/mocks/mockServices';
 
 export function useRealTimeOrders() {
   const addOrder = useOrderStore((state) => state.addOrder);
@@ -13,22 +13,21 @@ export function useRealTimeOrders() {
   useEffect(() => {
     if (USE_MOCK) {
       // Mock模式：模拟订单推送
-      const cleanup = simulateOrderPush((newOrder) => {
-        // 播放提示音
+      const timer = setInterval(() => {
+        const newOrder = generateMockOrder();
+
         playNotificationSound();
-        
-        // 显示Toast提示
+
         Toast.show({
           icon: 'success',
           content: `新订单：${newOrder.title}，运费¥${newOrder.freight}`,
           duration: 3000,
         });
-        
-        // 添加到订单列表
-        addOrder(newOrder);
-      });
 
-      return cleanup;
+        addOrder(newOrder);
+      }, 8000);
+
+      return () => clearInterval(timer);
     }
 
     // 真实模式：SSE连接

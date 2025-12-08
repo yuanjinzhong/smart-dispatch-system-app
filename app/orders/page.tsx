@@ -110,19 +110,17 @@ export default function OrdersPage() {
         抢单大厅
       </NavBar>
 
-      <div className="bg-primary text-white px-4 py-3">
-        <div className="flex items-center justify-between">
-          <div>
-            <div className="text-sm opacity-90">
-              当前位置：{position ? '已定位' : '定位中...'}
-            </div>
-            <div className="text-xs opacity-75 mt-1">
-              今日已接：{driver?.todayOrders || 0}单
-            </div>
+      <div className="px-4 pt-3">
+        <div className="card-panel px-4 py-3 flex items-center justify-between">
+          <div className="flex flex-col gap-1 text-sm text-muted">
+            <span>当前位置：{position ? '已定位' : '定位中...'}</span>
+            <span>今日已接：{driver?.todayOrders || 0} 单</span>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold">{orders.length}</div>
-            <div className="text-xs opacity-75">可抢订单</div>
+            <div className="text-2xl font-bold text-[var(--text-primary)]">
+              {orders.length}
+            </div>
+            <div className="text-xs text-muted">可抢订单</div>
           </div>
         </div>
       </div>

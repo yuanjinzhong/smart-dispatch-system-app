@@ -20,31 +20,38 @@ export default function StatisticsCard({
   rating,
 }: StatisticsCardProps) {
   return (
-    <Card className="mb-4">
-      <div className="mb-3">
-        <div className="text-sm text-gray-500">今日收益</div>
-        <div className="text-2xl font-bold text-primary mt-1">
+    <Card className="card-panel">
+      <div className="flex flex-col gap-2 mb-4">
+        <div className="text-sm text-muted">今日收益</div>
+        <div className="text-3xl font-bold text-primary leading-tight">
           {formatMoney(todayIncome)}
         </div>
+        <div className="text-xs text-muted">数据每 5 分钟刷新</div>
       </div>
-      
-      <Grid columns={3} gap={8}>
+
+      <Grid columns={3} gap={12}>
         <Grid.Item>
-          <div className="text-center">
-            <div className="text-lg font-bold">{todayOrders}</div>
-            <div className="text-xs text-gray-500 mt-1">今日订单</div>
+          <div className="flex flex-col items-center gap-1">
+            <div className="text-xl font-semibold text-[var(--text-primary)]">
+              {todayOrders}
+            </div>
+            <div className="text-xs text-muted">今日订单</div>
           </div>
         </Grid.Item>
         <Grid.Item>
-          <div className="text-center">
-            <div className="text-lg font-bold">{completionRate}%</div>
-            <div className="text-xs text-gray-500 mt-1">完单率</div>
+          <div className="flex flex-col items-center gap-1">
+            <div className="text-xl font-semibold text-success">
+              {completionRate}%
+            </div>
+            <div className="text-xs text-muted">完单率</div>
           </div>
         </Grid.Item>
         <Grid.Item>
-          <div className="text-center">
-            <div className="text-lg font-bold">{rating.toFixed(1)}</div>
-            <div className="text-xs text-gray-500 mt-1">评分</div>
+          <div className="flex flex-col items-center gap-1">
+            <div className="text-xl font-semibold text-[var(--text-primary)]">
+              {rating.toFixed(1)}
+            </div>
+            <div className="text-xs text-muted">评分</div>
           </div>
         </Grid.Item>
       </Grid>

@@ -3,10 +3,18 @@
 @tailwind utilities;
 
 :root {
-  --primary-color: #1890ff;
-  --success-color: #52c41a;
-  --warning-color: #faad14;
-  --danger-color: #ff4d4f;
+  --brand-primary: #1456e0;
+  --brand-success: #12b76a;
+  --brand-warning: #f59e0b;
+  --brand-danger: #ff4d4f;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --bg-page: #f7f8fa;
+  --radius: 10px;
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
 }
 
 * {
@@ -27,14 +35,15 @@ body {
     'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: var(--bg-page);
 }
 
 /* Ant Design Mobile 主题定制 */
 :root:root {
-  --adm-color-primary: var(--primary-color);
-  --adm-color-success: var(--success-color);
-  --adm-color-warning: var(--warning-color);
-  --adm-color-danger: var(--danger-color);
+  --adm-color-primary: var(--brand-primary);
+  --adm-color-success: var(--brand-success);
+  --adm-color-warning: var(--brand-warning);
+  --adm-color-danger: var(--brand-danger);
 }
 
 /* 安全区域适配 */
@@ -68,22 +77,42 @@ body {
 }
 
 .page-content {
-  padding: 16px;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* 卡片通用样式 */
+.card-panel {
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  border: 1px solid #eef1f5;
 }
 
 /* 工具类 */
 .text-primary {
-  color: var(--primary-color);
+  color: var(--brand-primary);
 }
 
 .text-success {
-  color: var(--success-color);
+  color: var(--brand-success);
 }
 
 .text-warning {
-  color: var(--warning-color);
+  color: var(--brand-warning);
 }
 
 .text-danger {
-  color: var(--danger-color);
+  color: var(--brand-danger);
+}
+
+.text-muted {
+  color: var(--text-secondary);
+}
+
+/* 底部导航选中态 */
+.adm-tab-bar-item-active .adm-tab-bar-item-title {
+  color: var(--brand-primary);
 }

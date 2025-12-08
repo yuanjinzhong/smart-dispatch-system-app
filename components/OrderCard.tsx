@@ -23,26 +23,28 @@ export default function OrderCard({ order, onGrab, onClick }: OrderCardProps) {
 
   return (
     <Card
-      className="mb-3 cursor-pointer hover:shadow-lg transition-shadow"
+      className="mb-3 cursor-pointer card-panel"
       onClick={() => onClick?.(order.orderId)}
     >
-      <div className="flex justify-between items-start mb-3">
+      <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">
           {order.isSubscribe && (
-            <Tag color="warning" fill="outline">
+            <Tag color="warning" fill="outline" className="text-xs">
               预约单
             </Tag>
           )}
           <span className="text-xl font-bold text-primary">
             {formatMoney(order.freight)}
           </span>
-          <span className="text-gray-500">
-            {formatDistance(order.distance)}
-          </span>
         </div>
-        <div className="flex items-center text-gray-500 text-sm">
-          <ClockCircleOutline className="mr-1" />
-          {formatDateTime(order.orderCreateTime)}
+        <div className="flex flex-col items-end text-xs text-muted gap-1">
+          <div className="flex items-center gap-1">
+            <ClockCircleOutline />
+            {formatDateTime(order.orderCreateTime)}
+          </div>
+          {order.distance !== undefined && (
+            <span>里程 {formatDistance(order.distance)}</span>
+          )}
         </div>
       </div>
 
@@ -63,15 +65,13 @@ export default function OrderCard({ order, onGrab, onClick }: OrderCardProps) {
         </div>
       </div>
 
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <div className="flex items-center justify-between pt-1">
+        <div className="flex items-center gap-2 text-sm text-muted">
           <Tag color="default" fill="outline">
             {order.vehicleType}
           </Tag>
           {order.distanceToDriver !== undefined && (
-            <span className="text-sm text-gray-500">
-              距你 {formatDistance(order.distanceToDriver)}
-            </span>
+            <span>距你 {formatDistance(order.distanceToDriver)}</span>
           )}
         </div>
         {onGrab && (

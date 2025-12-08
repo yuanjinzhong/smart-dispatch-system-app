@@ -5,7 +5,7 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Card, Grid, Button } from 'antd-mobile';
+import { Card, Grid, Tag, Space } from 'antd-mobile';
 import {
   UnorderedListOutline,
   FileOutline,
@@ -93,12 +93,10 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="page-container bg-gray-50">
+    <div className="page-container bg-[var(--bg-page)]">
       <div className="page-content">
         {/* 司机状态 */}
-        <div className="mb-4">
-          <DriverStatus />
-        </div>
+        <DriverStatus />
 
         {/* 统计卡片 */}
         <StatisticsCard
@@ -109,16 +107,18 @@ export default function HomePage() {
         />
 
         {/* 快捷入口 */}
-        <Card title="快捷入口" className="mb-4">
-          <Grid columns={4} gap={16}>
+        <Card title="快捷入口" className="card-panel" bodyClassName="pt-2">
+          <Grid columns={4} gap={12}>
             {quickActions.map((action) => (
               <Grid.Item key={action.key}>
                 <div
-                  className="flex flex-col items-center cursor-pointer"
+                  className="flex flex-col items-center gap-2 cursor-pointer"
                   onClick={() => router.push(action.path)}
                 >
-                  <div className={`${action.color} mb-2`}>{action.icon}</div>
-                  <div className="text-xs text-gray-600">{action.title}</div>
+                  <div className="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-xl text-[var(--text-primary)]">
+                    {action.icon}
+                  </div>
+                  <div className="text-xs text-muted">{action.title}</div>
                 </div>
               </Grid.Item>
             ))}
@@ -126,22 +126,30 @@ export default function HomePage() {
         </Card>
 
         {/* 今日数据 */}
-        <Card title="今日数据">
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">已接订单</span>
-              <span className="font-bold text-lg">{driver.todayOrders || 0}</span>
+        <Card title="今日数据" className="card-panel">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="flex flex-col gap-1">
+              <span className="text-muted text-sm">已接订单</span>
+              <span className="text-xl font-semibold text-[var(--text-primary)]">
+                {driver.todayOrders || 0}
+              </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">总收益</span>
-              <span className="font-bold text-lg text-primary">
+            <div className="flex flex-col gap-1">
+              <span className="text-muted text-sm">总收益</span>
+              <span className="text-xl font-semibold text-primary">
                 ¥{(driver.todayIncome || 0).toFixed(2)}
               </span>
             </div>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-600">完单率</span>
-              <span className="font-bold text-lg text-success">
-                {driver.completionRate || 0}%
+            <div className="flex flex-col gap-1">
+              <span className="text-muted text-sm">完单率</span>
+              <span className="text-xl font-semibold text-success">
+                {(driver.completionRate || 0).toFixed(0)}%
+              </span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-muted text-sm">评分</span>
+              <span className="text-xl font-semibold text-[var(--text-primary)]">
+                {(driver.rating || 0).toFixed(1)}
               </span>
             </div>
           </div>

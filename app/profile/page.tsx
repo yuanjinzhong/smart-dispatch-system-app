@@ -16,7 +16,7 @@ import {
 import {
   RightOutline,
   FileOutline,
-  BarChartOutline,
+  PieOutline,
   StarFill,
   TruckOutline,
   SetOutline,
@@ -70,33 +70,29 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="page-container">
+    <div className="page-container bg-[var(--bg-page)]">
       <NavBar backArrow={false}>个人中心</NavBar>
 
       <div className="page-content">
         {/* 用户信息卡片 */}
-        <Card className="mb-4">
-          <div className="flex items-center">
+        <Card className="card-panel">
+          <div className="flex items-center gap-3">
             <Avatar
               src={driver.avatar}
-              style={{ '--size': '64px' }}
+              style={{ '--size': '56px' }}
             >
               {driver.name.charAt(0)}
             </Avatar>
-            <div className="ml-4 flex-1">
-              <div className="text-lg font-bold mb-1">{driver.name}</div>
-              <div className="text-sm text-gray-500">{driver.phone}</div>
-              <div className="flex items-center mt-2 gap-4">
-                <div className="flex items-center">
-                  <StarFill className="text-warning mr-1" />
-                  <span className="text-sm">{driver.rating.toFixed(1)}</span>
+            <div className="flex-1">
+              <div className="text-base font-semibold mb-1">{driver.name}</div>
+              <div className="text-xs text-muted">{driver.phone}</div>
+              <div className="flex items-center mt-2 gap-3 text-xs text-muted">
+                <div className="flex items-center gap-1">
+                  <StarFill className="text-warning" />
+                  <span>{driver.rating.toFixed(1)}</span>
                 </div>
-                <div className="text-sm text-gray-500">
-                  完单率 {driver.completionRate}%
-                </div>
-                <div className="text-sm text-gray-500">
-                  L{driver.memberLevel}
-                </div>
+                <div>完单率 {driver.completionRate}%</div>
+                <div>L{driver.memberLevel}</div>
               </div>
             </div>
           </div>
@@ -104,38 +100,39 @@ export default function ProfilePage() {
 
         {/* 收益统计 */}
         {statistics && (
-          <Card title="收益统计" className="mb-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <div className="text-sm text-gray-500 mb-1">今日收益</div>
-                <div className="text-lg font-bold text-primary">
+          <Card className="card-panel">
+            <div className="text-sm text-muted mb-3">收益统计</div>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted">今日收益</span>
+                <span className="text-lg font-semibold text-primary">
                   {formatMoney(statistics.todayIncome)}
-                </div>
+                </span>
               </div>
-              <div>
-                <div className="text-sm text-gray-500 mb-1">本周收益</div>
-                <div className="text-lg font-bold">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted">本周收益</span>
+                <span className="text-lg font-semibold text-[var(--text-primary)]">
                   {formatMoney(statistics.weekIncome)}
-                </div>
+                </span>
               </div>
-              <div>
-                <div className="text-sm text-gray-500 mb-1">本月收益</div>
-                <div className="text-lg font-bold">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted">本月收益</span>
+                <span className="text-lg font-semibold text-[var(--text-primary)]">
                   {formatMoney(statistics.monthIncome)}
-                </div>
+                </span>
               </div>
-              <div>
-                <div className="text-sm text-gray-500 mb-1">总收益</div>
-                <div className="text-lg font-bold">
+              <div className="flex flex-col gap-1">
+                <span className="text-xs text-muted">总收益</span>
+                <span className="text-lg font-semibold text-[var(--text-primary)]">
                   {formatMoney(statistics.totalIncome)}
-                </div>
+                </span>
               </div>
             </div>
           </Card>
         )}
 
         {/* 功能列表 */}
-        <Card className="mb-4">
+        <Card className="card-panel">
           <List>
             <List.Item
               prefix={<FileOutline />}
@@ -146,7 +143,7 @@ export default function ProfilePage() {
               <RightOutline />
             </List.Item>
             <List.Item
-              prefix={<BarChartOutline />}
+              prefix={<PieOutline />}
               onClick={() => Toast.show({ content: '功能开发中' })}
               clickable
             >
@@ -173,7 +170,7 @@ export default function ProfilePage() {
         </Card>
 
         {/* 退出登录 */}
-        <Card>
+        <Card className="card-panel">
           <List>
             <List.Item
               prefix={<ExclamationCircleOutline />}
