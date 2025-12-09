@@ -3,7 +3,7 @@
  */
 'use client';
 
-import { Card, Tag, Button } from 'antd-mobile';
+import { Tag, Button } from 'antd-mobile';
 import { ClockCircleOutline, LocationFill } from 'antd-mobile-icons';
 import { Order } from '@/types/order';
 import { formatMoney, formatDateTime } from '@/utils/format';
@@ -22,11 +22,11 @@ export default function OrderCard({ order, onGrab, onClick }: OrderCardProps) {
   };
 
   return (
-    <Card
-      className="mb-3 cursor-pointer card-panel"
+    <div
+      className="bg-white px-4 py-3 border-b border-gray-100 cursor-pointer"
       onClick={() => onClick?.(order.orderId)}
     >
-      <div className="flex items-start justify-between mb-3">
+      <div className="flex items-start justify-between mb-2">
         <div className="flex items-center gap-2">
           {order.isSubscribe && (
             <Tag color="warning" fill="outline" className="text-xs">
@@ -84,7 +84,7 @@ export default function OrderCard({ order, onGrab, onClick }: OrderCardProps) {
           </Button>
         )}
       </div>
-    </Card>
+    </div>
   );
 }
 

@@ -3,6 +3,7 @@
  */
 import type { Metadata } from 'next';
 import './globals.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '智能调度系统 - 司机端',
@@ -23,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body className="bg-gray-50">
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
